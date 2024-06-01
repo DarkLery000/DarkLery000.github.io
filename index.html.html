@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificação do Funcionário</title>
+    <style>
+        body {
+            background: linear-gradient(to right, black, #00008B);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .card {
+            background: linear-gradient(to bottom right, #ffffff, #e0e0e0);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
+            width: 350px;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #2225c4;
+        }
+
+        .card .logo {
+            opacity: 0.5;
+        }
+
+        .card img.background {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 70px;
+            opacity: 0.3;
+        }
+
+        .card .front,
+        .card .back {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .card .front img.photo {
+            border-radius: 50%;
+            margin-right: 20px;
+            width: 80px;
+            height: 80px;
+            margin-top: -50px;
+        }
+
+        .card .front img.logo,
+        .card .back img.logo {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 50px;
+            opacity: 0.5;
+        }
+
+        .card .info {
+            flex: 1;
+            margin-top: -50px;
+            
+        }
+
+        .card .info2 {
+            flex: 1;
+            margin-top: -50px;
+            margin-left: -180px;
+            
+        }
+
+        .card .info h2 {
+            margin: 0 0 10px 0;
+            font-size: 20px;
+            flex: 1;
+        }
+
+        .card .info p {
+            margin: 5px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+        .card .info2 p {
+            margin: 5px 0;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .card .info .title {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+            text-align: left;
+            
+        }
+
+        .card .back {
+            justify-content: flex-start;
+            text-align: left;
+            flex-direction: column;
+            padding-left: 20px;
+        }
+
+        .card .qr-code {
+            margin-top: 10px;
+            width: 50px;
+        }
+
+        .card .back .contact-info {
+            font-size: 12px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .card .social-icons {
+            margin-top: 10px;
+        }
+
+        .card .social-icons img {
+            width: 20px;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Frente do cartão -->
+    <div class="card">
+        <img src="https://i.imgur.com/9IyIdrT.png" alt="Logo da Empresa" class="logo" style="width: 40px;">
+        <img src="https://i.imgur.com/rO8J0Lq.jpg" alt="Imagem de Fundo" class="background">
+        <div class="front">
+            <img id="fotoFuncionario" alt="Foto do Funcionário" class="photo">
+            <div class="info">
+                <h2 id="nomeFuncionario">Nome do Funcionário</h2>
+                <p class="title">Cargo do Funcionário</p>
+                <p class="title">Setor do Funcionário</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Verso do cartão -->
+    <div class="card" id="versoCartao">
+        <img src="https://i.imgur.com/9IyIdrT.png" alt="Logo da Empresa" class="logo" style="width: 40px;">
+        <img src="https://i.imgur.com/rO8J0Lq.jpg" alt="Imagem de Fundo" class="background">
+        <div class="back">
+            <div class="info2" id="infoVerso">
+                <div class="contact-info">
+                    <p>CPF:</p>
+                    <p>RG:</p>
+                    <p>Nascimento:</p>
+                    <p>Tipo Sang:</p>
+                    <p>Sus:</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão Treinamentos -->
+    <button onclick="listarArquivos()">Treinamentos</button>
+
+    <script>
+        const nomeFuncionario = document.getElementById('nomeFuncionario');
+        const versoCartao = document.getElementById('versoCartao');
+        const infoVerso = document.getElementById('infoVerso');
+        const fotoFuncionario = document.getElementById('fotoFuncionario');
+
+        // Texto original
+        const textoOriginal = nomeFuncionario.textContent;
+
+        // Adiciona evento de passagem do mouse
+        nomeFuncionario.addEventListener('mouseover', function () {
+            this.textContent = "Treinamento: Vencido";
+        });
+
+        // Adiciona evento de toque para dispositivos móveis
+        nomeFuncionario.addEventListener('touchstart', function () {
+            this.textContent = "Treinamento: Vencido";
+        });
+
+        // Adiciona evento de remoção do mouse
+        nomeFuncionario.addEventListener('mouseout', function () {
+            this.textContent = textoOriginal;
+        });
+
+        // Função para listar arquivos da pasta "Treinamentos"
+        function listarArquivos() {
+            // Simula a lista de arquivos da pasta "Treinamentos"
+            const arquivos = [
+                'Treinamento1.pdf',
+                'Treinamento2.docx',
+                'Treinamento3.pptx'
+            ];
+
+            infoVerso.innerHTML = ''; // Limpa o conteúdo do verso
+
+            arquivos.forEach(arquivo => {
+                const nomeSemExtensao = arquivo.split('.').slice(0, -1).join('.');
+                const novoTexto = document.createElement('p');
+                novoTexto.textContent = nomeSemExtensao;
+                novoTexto.classList.add('title'); // Adiciona a classe 'title'
+                infoVerso.appendChild(novoTexto);
+            });
+        }
+
+        // Função para carregar a foto do funcionário
+        function carregarFotoFuncionario() {
+            const formatos = ['png', 'jpg'];
+            let encontrado = false;
+
+            formatos.forEach(formato => {
+                if (!encontrado) {
+                    const img = new Image();
+                    img.src = `Foto.${formato}`;
+                    img.onload = function () {
+                        fotoFuncionario.src = img.src;
+                        encontrado = true;
+                    };
+                }
+            });
+        }
+
+        // Carrega a foto do funcionário ao carregar a página
+        window.onload = carregarFotoFuncionario;
+    </script>
+
+</body>
+
+</html>
